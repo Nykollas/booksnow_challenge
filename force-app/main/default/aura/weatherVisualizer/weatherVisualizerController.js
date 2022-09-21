@@ -7,11 +7,6 @@
             cmp.set('v.location', queryTerm);
             cmp.set('v.issearching', true);
             
-            /*
-            setTimeout(function() {
-                alert('Searched for "' + queryTerm + '"!');
-                cmp.set('v.issearching', false);
-            }, 2000);*/
             
             var action = cmp.get("c.getWeatherByLocation");
             
