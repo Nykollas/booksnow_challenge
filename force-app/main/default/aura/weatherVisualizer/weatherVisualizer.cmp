@@ -1,0 +1,182 @@
+<aura:component implements='flexipage:availableForAllPageTypes' controller="VisualCrossingController">
+    <aura:attribute name="issearching" type="Boolean" default="false" />
+    <aura:attribute name="hasData" type="Boolean"  default="false"></aura:attribute>
+    <aura:attribute name="location" type="String" />
+    <aura:attribute name="datetime" type="String" />
+    <aura:attribute name="datetimeEpoch" type="String" />
+    <aura:attribute name="temp" type="Decimal" />
+    <aura:attribute name="feelslike" type="Decimal" />
+    <aura:attribute name="humidity" type="Decimal" />
+    <aura:attribute name="dew" type="Decimal" />
+    <aura:attribute name="precip" type="Decimal" />
+    <aura:attribute name="precipprob" type="Decimal"  />
+    <aura:attribute name="snow" type="Decimal" />
+    <aura:attribute name="snowdepth" type="Decimal" />
+    <aura:attribute name="preciptype" type="String" />
+    <aura:attribute name="windgust" type="Decimal" />
+    <aura:attribute name="windspeed" type="Decimal" />
+    <aura:attribute name="winddir" type="Decimal" />
+    <aura:attribute name="pressure" type="Decimal" />
+    <aura:attribute name="visibility" type="Decimal" />
+    <aura:attribute name="cloudcover" type="Decimal" />
+    <aura:attribute name="solarradiation" type="Decimal" />
+    <aura:attribute name="solarenergy" type="Decimal" />
+    <aura:attribute name="uvindex" type="Decimal" />
+    <aura:attribute name="conditions" type="String" />
+    <aura:attribute name="icon" type="String" />
+    <aura:attribute name="sunrise" type="String" />
+    <aura:attribute name="sunriseEpoch" type="Integer" />
+    <aura:attribute name="sunset" type="String" />
+    <aura:attribute name="sunsetEpoch" type="Integer" />
+    <aura:attribute name="moonphase" type="Decimal" />
+    <aura:attribute name="resolvedAddress" type="String" />
+
+    <ltng:require styles="/resource/SLDS201/assets/styles/salesforce-lightning-design-system-vf.css" />
+
+    <div onkeyup="{! c.handleKeyUp }">
+
+
+        <lightning:input onchange="{!c.searchHandler}" aura:id="enter-search" name="enter-search" label="Search when user hits the 'enter' key"
+            isLoading="{! v.issearching }" type="search" />
+    </div>
+
+    <aura:if isTrue="{!v.hasData}">
+        
+    
+    
+
+        
+
+
+            <div class="card">
+                <div class="slds-grid slds-gutters">
+                    
+                    <div class="slds-size_6-of-12">
+                        <div>
+                            <div class="temp-container">
+                                <p style="font-size:32px">{!v.temp} ºC</p>
+                            </div>
+                            <div class='feelslike-container'>
+                                <p  class='slds-text-title_bold' style="font-size:18px"> Feels Like {!v.feelslike} ºC</p>
+                            </div>
+                            <div class='condition-container'>
+                                <p  class='slds-text-title_bold' style="font-size:18px"> {!v.conditions}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_6-of-12">
+                        <div class="'slds-grid slds-gutters">
+                            <p><b>Wind:</b> &nbsp; {!v.windspeed} km/h</p>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <p><b>Humidity:</b> &nbsp; {!v.humidity} %</p>
+                        </div>
+                        <div class="'slds-grid slds-gutters">
+                            <p><b>Precipitation Prob:</b> &nbsp; {!v.precipprob} %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <p>{!v.resolvedAddress}</p>
+                </div>
+                
+
+            </div>
+            
+
+
+
+
+            <div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Temperature(°C)</div>
+                    <div class="slds-size_1-of-2">{!v.temp} </div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Feels like(°C)</div>
+                    <div class="slds-size_1-of-2">{!v.feelslike} </div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Humidity(%)</div>
+                    <div class="slds-size_1-of-2">{!v.humidity}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Dew</div>
+                    <div class="slds-size_1-of-2">{!v.dew}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">precipitation</div>
+                    <div class="slds-size_1-of-2">{!v.precip}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Precipitation Prob.(%)</div>
+                    <div class="slds-size_1-of-2">{!v.precipprob}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Snow</div>
+                    <div class="slds-size_1-of-2">{!v.snow}</div>
+                </div>
+            
+            
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Snow Depth</div>
+                    <div class="slds-size_1-of-2">{!v.snowdepth}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class=" slds-text-title_bold slds-size_1-of-2">Precipitation Type</div>
+                    <div class="slds-size_1-of-2">{!v.preciptype}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Wind Gust</div>
+                    <div class="slds-size_1-of-2">{!v.windgust}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Wind Speed(m/s)</div>
+                    <div class="slds-size_1-of-2">{!v.windspeed}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Wind Direction</div>
+                    <div class="slds-size_1-of-2">{!v.winddir}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Pressure</div>
+                    <div class="slds-size_1-of-2">{!v.pressure}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Visibility</div>
+                    <div class="slds-size_1-of-2">{!v.visibility}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Cloud Cover</div>
+                    <div class="slds-size_1-of-2">{!v.cloudcover}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Solar Radiation</div>
+                    <div class="slds-size_1-of-2">{!v.solarradiation}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Solar Energy</div>
+                    <div class="slds-size_1-of-2">{!v.solarenergy}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">UV Index</div>
+                    <div class="slds-size_1-of-2">{!v.uvindex}</div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-text-title_bold slds-size_1-of-2">Conditions</div>
+                    <div class="slds-size_1-of-2">{!v.conditions}</div>
+                </div>
+</div>
+            
+</aura:if>
+<aura:if isTrue="{!and(notequals(v.hasData, true))}">
+    <div>
+        <p> Search for a location</p>
+    </div>
+</aura:if>
+        
+    
+
+
+
+</aura:component>
