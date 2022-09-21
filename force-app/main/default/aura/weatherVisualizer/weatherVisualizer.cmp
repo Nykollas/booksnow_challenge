@@ -36,7 +36,7 @@
     <div onkeyup="{! c.handleKeyUp }">
 
 
-        <lightning:input onchange="{!c.searchHandler}" aura:id="enter-search" name="enter-search" label="Enter a"
+        <lightning:input onchange="{!c.searchHandler}" aura:id="enter-search" name="enter-search" label="Enter a location"
             isLoading="{! v.issearching }" type="search" />
     </div>
 
